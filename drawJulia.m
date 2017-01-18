@@ -1,27 +1,27 @@
-function drawJulia %build the image pixel by pixel.
-    n = 500; %size of the image.
-    max = 250; %maximum number of iterations to be computed.
-    c = -0.4 + 0.6*i; %set the constant in the map z <- z^2 + c used later.
-    x = linspace(-1.5,1.5,n); %define the plot space
+function drawJulia
+    n = 500;
+    max = 250;
+    c = -0.4 + 0.6*i;
+    x = linspace(-1.5,1.5,n);
     y = linspace(-1.5,1.5,n);
-    color = colorPixels(x,y,n,c,max); %color matrix for every pixel.
-    image(x,y,color); %build the image.
-    colormap(pink); %set the color map.
-    axis image; %show the axis of the plot space.
+    color = colorPixels(x,y,n,c,max);
+    image(x,y,color);
+    colormap(pink);
+    axis image;
 end
  
-function color = colorPixels(x,y,n,c,max) %builds color matrix for every pixel.
-    [x,y] = ndgrid(x,i*y); %create a complex grid from plot space.
-    color = arrayfun(@colorCount,x + y); %call colorCount for every point.
+function color = colorPixels(x,y,n,c,max)
+    [x,y] = ndgrid(x,i*y);
+    color = arrayfun(@colorCount,x + y);
     
-    function col = colorCount(z) %distribute colors amongs the points.
-        for k = 1:max %iterate at most up to the given maximum.
-            z = z^2 + c; %iterate over z.
-            if norm(z) >= 2 %verify that the values stay bounded by 2.
-                col = k*125/max; %give a color value to the point given by c.
+    function col = colorCount(z)
+        for k = 1:max
+            z = z^2 + c;
+            if norm(z) >= 2
+                col = k*125/max;
                 return
             end
-            col = 0; %erase the previous color value to proceed.
+            col = 0;
         end
     end
 end
