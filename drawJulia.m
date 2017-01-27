@@ -5,6 +5,7 @@ function drawJulia
     x = linspace(-1.5,1.5,n);
     y = linspace(-1.5,1.5,n);
     color = colorPixels(x,y,n,c,max);
+    figure;
     image(x,y,color);
     colormap(pink);
     axis image;
